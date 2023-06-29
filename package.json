@@ -16,7 +16,12 @@
       {
         "command": "todo-list.helloWorld",
         "title": "Hello World"
+      },
+      {
+        "command": "todo-list.webviewPanel",
+        "title": "WebView Panel"
       }
+      
     ]
   },
   "scripts": {

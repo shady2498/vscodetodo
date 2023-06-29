@@ -1,5 +1,6 @@
 
 import * as vscode from 'vscode';
+import { WebviewPanel } from './WebviewPanel';
 
 export function activate(context: vscode.ExtensionContext) {
 
@@ -11,6 +12,10 @@ export function activate(context: vscode.ExtensionContext) {
 	});
 
 	context.subscriptions.push(disposable);
+
+	context.subscriptions.push(vscode.commands.registerCommand('todo-list.webviewPanel', () => {
+		WebviewPanel.createOrShow(context.extensionUri)
+	}))
 }
 
 export function deactivate() {}
