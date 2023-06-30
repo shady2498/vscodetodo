@@ -127,7 +127,7 @@ export class WebviewPanel {
   private _getHtmlForWebview(webview: vscode.Webview) {
     // // And the uri we use to load this script in the webview
     const scriptUri = webview.asWebviewUri(
-      vscode.Uri.joinPath(this._extensionUri, "out", "compiled/swiper.js")
+      vscode.Uri.joinPath(this._extensionUri, "out/compiled", "main.js")
     );
 
     // Local path to css styles
@@ -145,9 +145,9 @@ export class WebviewPanel {
     // Uri to load styles into webview
     const stylesResetUri = webview.asWebviewUri(styleResetPath);
     const stylesMainUri = webview.asWebviewUri(stylesPathMainPath);
-    const cssUri = webview.asWebviewUri(
-      vscode.Uri.joinPath(this._extensionUri, "out", "compiled/swiper.css")
-    );
+    // const cssUri = webview.asWebviewUri(
+    //   vscode.Uri.joinPath(this._extensionUri, "out", "compiled/swiper.css")
+    // );
 
     // Use a nonce to only allow specific scripts to be run
     const nonce = getNonce();
@@ -166,7 +166,7 @@ export class WebviewPanel {
 				<meta name="viewport" content="width=device-width, initial-scale=1.0">
 				<link href="${stylesResetUri}" rel="stylesheet">
 				<link href="${stylesMainUri}" rel="stylesheet">
-        <link href="${cssUri}" rel="stylesheet">
+
         <script nonce="${nonce}">
         
             const tsvscode = acquireVsCodeApi();
@@ -174,7 +174,8 @@ export class WebviewPanel {
         </script>
 			</head>
       <body>
-      <h1>Hello world!!</h1>
+      <script nonce="${nonce}" src="${scriptUri}"></script>
+
 			</body>
 			</html>`;
   }
