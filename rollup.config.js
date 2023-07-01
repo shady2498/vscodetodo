@@ -5,15 +5,22 @@ const replace = require('@rollup/plugin-replace');
 const typescript = require('rollup-plugin-typescript2');
 const serve = require('rollup-plugin-serve');
 const livereload = require('rollup-plugin-livereload');
+const path = require("path");
+const fs = require("fs");
 
 const isProduction = process.env.NODE_ENV === 'production';
 
-module.exports = {
-  input: 'webviews/index.tsx',
+module.exports = fs
+  .readdirSync(path.join(__dirname, "webviews", "src"))
+  .map((input) => {
+    const name = input.split(".")[0];
+    return {
+      input: "webviews/src/" + input,
   output: {
-    file: 'out/compiled/main.js',
-    format: 'iife',
-    sourcemap: !isProduction,
+    sourcemap: true,
+    format: "iife",
+    name: "app",
+    file: "out/compiled/" + name + ".js",
   },
   plugins: [
     nodeResolve({
@@ -36,4 +43,9 @@ module.exports = {
     isProduction ? null : serve({ contentBase: ['dist', 'public'], port: 3000 }),
     isProduction ? null : livereload('dist'),
   ],
+  watch: {
+    clearScreen: false,
+  },
 };
+});
+

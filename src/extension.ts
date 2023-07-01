@@ -1,10 +1,20 @@
 
 import * as vscode from 'vscode';
 import { WebviewPanel } from './WebviewPanel';
+import { SidebarProvider } from './SidebarProvides';
 
 export function activate(context: vscode.ExtensionContext) {
 
 	console.log('Congratulations, your extension "todo-list" is now active!');
+
+	
+	const sidebarProvider = new SidebarProvider(context.extensionUri);
+	context.subscriptions.push(
+	  vscode.window.registerWebviewViewProvider(
+		"todolist-sidebar",
+		sidebarProvider
+	  )
+	);
 
 	let disposable = vscode.commands.registerCommand('todo-list.helloWorld', () => {
 
