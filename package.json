@@ -61,6 +61,7 @@
     "@rollup/plugin-commonjs": "^25.0.2",
     "@rollup/plugin-node-resolve": "^15.1.0",
     "@rollup/plugin-replace": "^5.0.2",
+    "@rollup/plugin-typescript": "^11.1.2",
     "@types/glob": "^8.1.0",
     "@types/mocha": "^10.0.1",
     "@types/node": "16.x",
@@ -74,15 +75,19 @@
     "glob": "^8.1.0",
     "mocha": "^10.2.0",
     "rollup": "^3.25.3",
+    "rollup-plugin-dts": "^5.3.0",
     "rollup-plugin-livereload": "^2.0.5",
+    "rollup-plugin-peer-deps-external": "^2.2.4",
     "rollup-plugin-serve": "^2.0.2",
     "rollup-plugin-typescript2": "^0.35.0",
     "ts-loader": "^9.4.2",
-    "typescript": "^5.0.4",
+    "tslib": "^2.6.0",
+    "typescript": "^5.1.6",
     "webpack": "^5.81.0",
     "webpack-cli": "^5.0.2"
   },
   "dependencies": {
+    "concurrently": "^8.2.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   }

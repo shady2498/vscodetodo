@@ -2,9 +2,10 @@ const { nodeResolve } = require('@rollup/plugin-node-resolve');
 const commonjs = require('@rollup/plugin-commonjs');
 const babel = require('@rollup/plugin-babel');
 const replace = require('@rollup/plugin-replace');
-const typescript = require('rollup-plugin-typescript2');
+const typescript = require('@rollup/plugin-typescript');
 const serve = require('rollup-plugin-serve');
 const livereload = require('rollup-plugin-livereload');
+const external = require('rollup-plugin-peer-deps-external');
 const path = require("path");
 const fs = require("fs");
 
@@ -21,12 +22,14 @@ module.exports = fs
     format: "iife",
     name: "app",
     file: "out/compiled/" + name + ".js",
+
   },
   plugins: [
     nodeResolve({
       extensions: ['.js', '.jsx', '.ts', '.tsx'],
     }),
     commonjs(),
+    external(),
     babel({
       babelHelpers: 'bundled',
       presets: ['@babel/preset-react'],

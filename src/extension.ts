@@ -1,7 +1,7 @@
 
 import * as vscode from 'vscode';
 import { WebviewPanel } from './WebviewPanel';
-import { SidebarProvider } from './SidebarProvides';
+import { SidebarProvider } from './SidebarProvider';
 
 export function activate(context: vscode.ExtensionContext) {
 
