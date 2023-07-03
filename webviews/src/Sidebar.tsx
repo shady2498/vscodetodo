@@ -4,19 +4,23 @@ import React, { useState } from 'react';
 import { createRoot } from "react-dom/client";
 
 
+//variable declaration
 interface Todo {
   id: number;
   text: string;
   completed: boolean;
 }
 
-
+// to render pt1
 const container = document.body;
 const root = createRoot(container);
 
+
+//todo component
 const Todos: React.FC = () => {
   const [todos, setTodos] = useState<Todo[]>([]);
   const [newTodo, setNewTodo] = useState('');
+  const [checked, setChecked] = useState(false); 
 
   const addTodo = () => {
     if (newTodo.trim() !== '') {
@@ -25,7 +29,7 @@ const Todos: React.FC = () => {
         text: newTodo,
         completed: false
       };
-
+      console.log("this is newtodo", newTodo)
       setTodos([...todos, newTodoItem]);
       setNewTodo('');
     }
@@ -54,7 +58,7 @@ const Todos: React.FC = () => {
           >
             {todo.text}
             <button onClick={() => toggleTodo(todo.id)}>Toggle</button>
-            <button onClick={() => deleteTodo(todo.id)}>Delete</button>
+            <img onClick={() => deleteTodo(todo.id)} alt="delete icon" src="/media/bin-icon.svg" />
           </li>
         ))}
       </ul>
