@@ -21,6 +21,9 @@ export function activate(context: vscode.ExtensionContext) {
 		vscode.window.showInformationMessage('Hello World from todo list! This is for test to check if extension is running');
 	});
 
+	
+
+
 	context.subscriptions.push(disposable);
 
 	context.subscriptions.push(vscode.commands.registerCommand('todo-list.webviewPanel', () => {

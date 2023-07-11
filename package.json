@@ -30,7 +30,30 @@
           "icon": "media/icon.svg",
           "contextualTitle": "ToDo"
         }
-      ]
+      ],
+      "explorer": [
+				{
+					"id": "jsonOutline",
+					"name": "Json Outline",
+					"when": "jsonOutlineEnabled"
+				},
+				{
+					"id": "ftpExplorer",
+					"name": "FTP Explorer"
+				},
+				{
+					"id": "fileExplorer",
+					"name": "File Explorer"
+				},
+				{
+					"id": "testView",
+					"name": "Test View"
+				},
+				{
+					"id": "testViewDragAndDrop",
+					"name": "Test View Drag and Drop"
+				}
+			]
     },
     "commands": [
       {
@@ -72,6 +95,7 @@
     "@typescript-eslint/parser": "^5.59.1",
     "@vscode/test-electron": "^2.3.0",
     "eslint": "^8.39.0",
+    "file-loader": "^6.2.0",
     "glob": "^8.1.0",
     "mocha": "^10.2.0",
     "rollup": "^3.25.3",

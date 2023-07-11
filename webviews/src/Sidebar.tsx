@@ -50,15 +50,20 @@ const Todos: React.FC = () => {
   return (
     <div>
       <h1>Todos</h1>
-      <ul>
+      <ul >
         {todos.map(todo => (
           <li
             key={todo.id}
             style={{ textDecoration: todo.completed ? 'line-through' : 'none' }}
+            className='listing-todo'
           >
             {todo.text}
-            <button onClick={() => toggleTodo(todo.id)}>Toggle</button>
-            <img onClick={() => deleteTodo(todo.id)} alt="delete icon" src="/media/bin-icon.svg" />
+            <span>
+              <img className='todo-icons' onClick={() => toggleTodo(todo.id)} alt="check icon" src="https://pixlok.com/wp-content/uploads/2021/12/Check-Icon-09iujhd.png"  />
+              <img className='todo-icons' onClick={() => deleteTodo(todo.id)} alt="delete icon" src="https://cdn-icons-png.flaticon.com/512/5360/5360299.png"  />
+            </span>
+          
+
           </li>
         ))}
       </ul>
@@ -70,6 +75,9 @@ const Todos: React.FC = () => {
         />
         <button onClick={addTodo}>Add Todo</button>
       </div>
+
+
+      
     </div>
   );
 };

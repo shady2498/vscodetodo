@@ -35,3 +35,16 @@ html {
     display: flex;
     flex-direction: column;
   }
+
+  .todo-icons{
+    width: 20px;
+    height: 20px;
+  }
+
+  .listing-todo{
+    display: flex;
+    justify-content: space-between;
+  }
+
+
+  

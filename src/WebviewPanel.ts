@@ -1,5 +1,7 @@
 import * as vscode from "vscode";
 import { getNonce } from "./helpers/getNonce";
+import path = require("path");
+import theImageMan from "../assets/123.png"
 
 
 export class WebviewPanel {
@@ -13,6 +15,8 @@ export class WebviewPanel {
   private readonly _panel: vscode.WebviewPanel;
   private readonly _extensionUri: vscode.Uri;
   private _disposables: vscode.Disposable[] = [];
+
+
 
   public static createOrShow(extensionUri: vscode.Uri) {
     const column = vscode.window.activeTextEditor
@@ -32,6 +36,7 @@ export class WebviewPanel {
       "ToDo App",
       column || vscode.ViewColumn.One,
       {
+        
         // Enable javascript in the webview
         enableScripts: true,
 
@@ -40,11 +45,16 @@ export class WebviewPanel {
           vscode.Uri.joinPath(extensionUri, "media"),
           vscode.Uri.joinPath(extensionUri, "out/compiled"),
         ],
+    
       }
     );
+    console.log("this is panel to see", panel,"extension uri here", extensionUri);
+    
 
     WebviewPanel.currentPanel = new WebviewPanel(panel, extensionUri);
   }
+
+
 
   public static kill() {
     WebviewPanel.currentPanel?.dispose();
@@ -115,11 +125,7 @@ export class WebviewPanel {
           vscode.window.showErrorMessage(data.value);
           break;
         }
-        // case "tokens": {
-        //   await Util.globalState.update(accessTokenKey, data.accessToken);
-        //   await Util.globalState.update(refreshTokenKey, data.refreshToken);
-        //   break;
-        // }
+
       }
     });
   }
@@ -151,21 +157,21 @@ export class WebviewPanel {
 
     // Use a nonce to only allow specific scripts to be run
     const nonce = getNonce();
+    const webviewCspSource = webview.cspSource.replace('vscode-webview:', 'https://*.vscode-cdn.net');
+console.log("this is webview", stylesResetUri)
 
     return `<!DOCTYPE html>
 			<html lang="en">
 			<head>
 				<meta charset="UTF-8">
-				<!--
-					Use a content security policy to only allow loading images from https or from our extension directory,
-					and only allow scripts that have a specific nonce.
-        -->
-        <meta http-equiv="Content-Security-Policy" content=" img-src https: data:; style-src 'unsafe-inline' ${
-      webview.cspSource
-    }; script-src 'nonce-${nonce}';">
+        <meta http-equiv="Content-Security-Policy" content="img-src ${webviewCspSource} https: data: ; style-src 'unsafe-inline' ${
+          webviewCspSource
+        }; script-src 'nonce-${nonce}';">
+        
 				<meta name="viewport" content="width=device-width, initial-scale=1.0">
 				<link href="${stylesResetUri}" rel="stylesheet">
 				<link href="${stylesMainUri}" rel="stylesheet">
+
 
         <script nonce="${nonce}">
         
@@ -174,7 +180,11 @@ export class WebviewPanel {
         </script>
 			</head>
       <body>
-      <script nonce="${nonce}" src="${scriptUri}"></script>
+      <img src="https://media.giphy.com/media/JIX9t2j0ZTN9S/giphy.gif" width="300" />
+  
+      <img src="https://cdn-icons-png.flaticon.com/512/5360/5360299.png" />
+
+      <img src="${theImageMan}"/>
 
 			</body>
 			</html>`;

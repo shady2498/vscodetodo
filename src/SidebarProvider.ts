@@ -17,6 +17,7 @@ export class SidebarProvider implements vscode.WebviewViewProvider {
       enableScripts: true,
 
       localResourceRoots: [this._extensionUri],
+      
     };
 
     webviewView.webview.html = this._getHtmlForWebview(webviewView.webview);
@@ -63,9 +64,6 @@ export class SidebarProvider implements vscode.WebviewViewProvider {
     const scriptUri = webview.asWebviewUri(
       vscode.Uri.joinPath(this._extensionUri, "out", "compiled/Sidebar.js")
     );
-    const styleMainUri = webview.asWebviewUri(
-      vscode.Uri.joinPath(this._extensionUri, "out", "compiled/sidebar.css")
-    );
 
 
     // Use a nonce to only allow a specific script to be run.
@@ -79,13 +77,12 @@ export class SidebarProvider implements vscode.WebviewViewProvider {
 					Use a content security policy to only allow loading images from https or from our extension directory,
 					and only allow scripts that have a specific nonce.
         -->
-        <meta http-equiv="Content-Security-Policy" content=" img-src https: data:; style-src 'unsafe-inline' ${
+        <meta http-equiv="Content-Security-Policy" content=" img-src vscode-webview://1d50e3n83684tcv8palmicacretgpt8ottmh8nut620cv4bmera1: https: data: ; style-src 'unsafe-inline' ${
       webview.cspSource
     }; script-src 'nonce-${nonce}';">
 				<meta name="viewport" content="width=device-width, initial-scale=1.0">
 				<link href="${styleResetUri}" rel="stylesheet">
 				<link href="${styleVSCodeUri}" rel="stylesheet">
-        <link href="${styleMainUri}" rel="stylesheet">
         <script nonce="${nonce}" >
           const tsvscode = acquireVsCodeApi();
         </script>
