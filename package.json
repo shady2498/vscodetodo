@@ -13,15 +13,22 @@
   "main": "./dist/extension.js",
   "contributes": {
     "viewsContainers": {
+
       "activitybar": [
         {
           "id": "todolist-sidebar-view",
           "title": "ToDo List",
           "icon": "media/icon.svg"
+        },
+        {
+          "id": "package-explorer",
+          "title": "Package Explorer",
+          "icon": "media/dep.svg"
         }
       ]
     },
     "views": {
+  
       "todolist-sidebar-view": [
         {
           "type": "webview",
@@ -31,28 +38,21 @@
           "contextualTitle": "ToDo"
         }
       ],
+      "package-explorer": [
+        {
+          "id": "nodeDependencies",
+          "name": "Node Dependencies",
+          "icon": "media/dep.svg",
+          "contextualTitle": "Package Explorer"
+        }
+      ],
       "explorer": [
-				{
-					"id": "jsonOutline",
-					"name": "Json Outline",
-					"when": "jsonOutlineEnabled"
-				},
-				{
-					"id": "ftpExplorer",
-					"name": "FTP Explorer"
-				},
-				{
-					"id": "fileExplorer",
-					"name": "File Explorer"
-				},
+	
 				{
 					"id": "testView",
 					"name": "Test View"
-				},
-				{
-					"id": "testViewDragAndDrop",
-					"name": "Test View Drag and Drop"
 				}
+		
 			]
     },
     "commands": [
@@ -63,8 +63,64 @@
       {
         "command": "todo-list.webviewPanel",
         "title": "WebView Panel"
+      },
+      {
+        "command": "nodeDependencies.refreshEntry",
+        "title": "Refresh",
+        "icon": {
+            "light": "resources/light/refresh.svg",
+            "dark": "resources/dark/refresh.svg"
+        }
+    },
+    {
+      "command": "nodeDependencies.addEntry",
+      "title": "Add"
+    },
+    {
+      "command": "nodeDependencies.editEntry",
+      "title": "Edit",
+      "icon": {
+        "light": "resources/light/edit.svg",
+        "dark": "resources/dark/edit.svg"
       }
-    ]
+    },
+    {
+      "command": "nodeDependencies.deleteEntry",
+      "title": "Delete"
+    },
+    {
+      "command": "testView.reveal",
+      "title": "Test View: Reveal"
+    },
+    {
+      "command": "testView.changeTitle",
+      "title": "Test View: Change Title"
+    }
+    ],
+    "menus": {
+      "view/title": [
+          {
+              "command": "nodeDependencies.refreshEntry",
+              "when": "view == nodeDependencies",
+              "group": "navigation"
+          },
+          {
+            "command": "nodeDependencies.addEntry",
+            "when": "view == nodeDependencies"
+          }
+      ],
+      "view/item/context": [
+        {
+          "command": "nodeDependencies.editEntry",
+          "when": "view == nodeDependencies && viewItem == dependency",
+          "group": "inline"
+        },
+        {
+          "command": "nodeDependencies.deleteEntry",
+          "when": "view == nodeDependencies && viewItem == dependency"
+        }
+      ]
+    }
   },
   "scripts": {
     "vscode:prepublish": "npm run package",
