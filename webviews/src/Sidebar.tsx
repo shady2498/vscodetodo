@@ -43,13 +43,19 @@ const Todos: React.FC = () => {
     );
   };
 
+  const handleKeyDown = (e: { key: string; }) => {
+    if (e.key === 'Enter') {
+      addTodo();
+    }
+  };
+
   const deleteTodo = (id: number) => {
     setTodos(prevTodos => prevTodos.filter(todo => todo.id !== id));
   };
 
   return (
     <div>
-      <h1>Todos</h1>
+      <h3 className='center-heading'>Todos</h3>
       <ul >
         {todos.map(todo => (
           <li
@@ -69,11 +75,15 @@ const Todos: React.FC = () => {
       </ul>
       <div>
         <input
+                  onKeyDown={handleKeyDown}
+          className='text-field-center'
           type="text"
           value={newTodo}
           onChange={e => setNewTodo(e.target.value)}
         />
-        <button onClick={addTodo}>Add Todo</button>
+        <div className='center-button'>
+          <button onClick={addTodo} >Add Todo</button>
+        </div>
       </div>
 
 
