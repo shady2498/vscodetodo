@@ -2,8 +2,8 @@
 import * as vscode from 'vscode';
 import { WebviewPanel } from './WebviewPanel';
 import { SidebarProvider } from './SidebarProvider';
-import { NodeDependenciesProvider } from './TreeProvider';
-import { TestView } from './TreeView';
+// import { NodeDependenciesProvider } from './TreeProvider';
+// import { TestView } from './TreeView';
 
 export function activate(context: vscode.ExtensionContext) {
 
@@ -12,11 +12,11 @@ export function activate(context: vscode.ExtensionContext) {
     vscode.workspace.workspaceFolders && vscode.workspace.workspaceFolders.length > 0
       ? vscode.workspace.workspaceFolders[0].uri.fsPath
       : undefined;
-  const nodeDependenciesProvider = new NodeDependenciesProvider(rootPath ? rootPath : "");
-  vscode.window.registerTreeDataProvider('nodeDependencies', nodeDependenciesProvider);
-  vscode.commands.registerCommand('nodeDependencies.refreshEntry', () =>
-    nodeDependenciesProvider.refresh()
-  );
+//   const nodeDependenciesProvider = new NodeDependenciesProvider(rootPath ? rootPath : "");
+//   vscode.window.registerTreeDataProvider('nodeDependencies', nodeDependenciesProvider);
+//   vscode.commands.registerCommand('nodeDependencies.refreshEntry', () =>
+//     nodeDependenciesProvider.refresh()
+//   );
 	
 	const sidebarProvider = new SidebarProvider(context.extensionUri);
 	context.subscriptions.push(
@@ -40,7 +40,7 @@ export function activate(context: vscode.ExtensionContext) {
 		WebviewPanel.createOrShow(context.extensionUri)
 	}))
 
-	new TestView(context);
+	// new TestView(context);
 }
 
 export function deactivate() {}

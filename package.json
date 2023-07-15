@@ -36,7 +36,11 @@
           "name": "ToDo List",
           "icon": "media/icon.svg",
           "contextualTitle": "ToDo"
-        }
+        },
+        {
+					"id": "testView",
+					"name": "Test View"
+				}
       ],
       "package-explorer": [
         {
